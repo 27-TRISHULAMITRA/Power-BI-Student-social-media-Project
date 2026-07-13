@@ -261,9 +261,6 @@ These insights help educational institutions focus awareness campaigns and stude
 <img width="1154" height="650" alt="617068831-f0ca570a-b18e-40e4-893f-04877ec4a143" src="https://github.com/user-attachments/assets/c98d16c2-20d4-4e25-9639-d82efc6baa6d" />
 
 
-
-**Dashboard Preview**
-
 This page explores relationship status distribution alongside student-wise addiction scores, filtered by country and academic level, to surface links between social media habits and relationship conflicts.
 
 
@@ -273,6 +270,166 @@ This page explores relationship status distribution alongside student-wise addic
 - Students in "complicated" relationships showed relatively higher social-media-related conflict scores.
 
 ---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Social Pulse — Blue Theme (Story View & Drill-Through)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#050b16;
+    --panel:#0a1626;
+    --panel2:#0d1c30;
+    --line:#16324f;
+    --blue-1:#0e5aa7;
+    --blue-2:#2f8fd8;
+    --blue-3:#63b8ee;
+    --blue-4:#9fd6ff;
+    --ice:#d7ecff;
+    --text:#e7f2fb;
+    --muted:#7fa6c4;
+    --accent:#3fd0ff;
+    --good:#2fd0a0;
+    --avg:#f2b84b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(1200px 600px at 20% -10%, #0c2036 0%, var(--bg) 55%);
+    color:var(--text);
+  }
+  .wrap{max-width:1500px;margin:0 auto;padding:28px 20px 60px;}
+  h1{
+    font-size:22px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--blue-4); margin:0 0 4px;
+  }
+  .sub{color:var(--muted); font-size:13px; margin-bottom:26px;}
+
+  .tabs{display:flex; gap:10px; margin-bottom:22px;}
+  .tab-btn{
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:10px 18px; border-radius:8px; cursor:pointer; font-size:13px;
+    letter-spacing:.03em; transition:.15s;
+  }
+  .tab-btn.active{
+    background:linear-gradient(135deg,var(--blue-1),var(--blue-2));
+    color:#eaf6ff; border-color:var(--blue-2); box-shadow:0 0 18px rgba(63,208,255,.25);
+  }
+
+  .page{display:none;}
+  .page.active{display:block;}
+
+  .board{
+    display:grid;
+    grid-template-columns:210px 1fr;
+    gap:18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+  }
+
+  .nav h2{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; margin:4px 0 14px;}
+  .nav-item{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 12px; border-radius:8px; margin-bottom:6px;
+    color:var(--muted); font-size:13px; cursor:default;
+  }
+  .nav-item.on{
+    background:linear-gradient(135deg, var(--blue-1), var(--blue-2));
+    color:#eaf6ff; font-weight:600;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--blue-3);}
+
+  .content h3{
+    font-size:20px; margin:0 0 18px; color:var(--blue-4);
+    border-bottom:1px solid var(--line); padding-bottom:10px;
+  }
+
+  .grid2x2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .card{
+    background:var(--panel2); border:1px solid var(--line); border-radius:12px;
+    padding:16px;
+  }
+  .card h4{margin:0 0 12px; font-size:13px; color:var(--blue-3); font-weight:600; letter-spacing:.03em;}
+  canvas{max-height:230px;}
+
+  /* Drill through table */
+  .table-scroll{
+    overflow:auto; max-height:560px; border:1px solid var(--line); border-radius:10px;
+  }
+  table{border-collapse:collapse; width:100%; font-size:12.5px; min-width:1100px;}
+  thead th{
+    position:sticky; top:0;
+    background:linear-gradient(180deg,#123354,#0d2540);
+    color:var(--blue-4); text-align:left; padding:10px 12px;
+    border-bottom:2px solid var(--blue-2); white-space:nowrap;
+  }
+  tbody td{padding:8px 12px; border-bottom:1px solid #10233a; color:var(--ice); white-space:nowrap;}
+  tbody tr:nth-child(even){background:rgba(63,208,255,.04);}
+  .low{color:var(--blue-3); font-weight:600;}
+  .good{color:var(--good); font-weight:600;}
+  .avg{color:var(--avg); font-weight:600;}
+  tfoot td{
+    padding:10px 12px; font-weight:700; color:var(--blue-4);
+    border-top:2px solid var(--blue-2); background:#0d2540;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Social Pulse · Student Social Media &amp; Wellbeing Analytics</h1>
+  <div class="sub">Blue theme recreation — Power BI Mini Project</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showPage('story')">Slide 5 — Interactive Story View</button>
+    <button class="tab-btn" onclick="showPage('drill')">Slide 6 — Drill-Through Analysis</button>
+  </div>
+
+  <!-- ================= STORY VIEW ================= -->
+  <div id="story" class="page active">
+    <div class="board">
+      <div class="nav">
+        <h2>Report Pages</h2>
+        <div class="nav-item">Executive Summary</div>
+        <div class="nav-item">Mental Health &amp; Lifestyle</div>
+        <div class="nav-item">Academic Impact</div>
+        <div class="nav-item">Relationships and Conflict</div>
+        <div class="nav-item on"><span class="dot"></span>Interactive Story View</div>
+        <div class="nav-item">Drill-Through</div>
+        <h2 style="margin-top:20px;">View Pages</h2>
+        <div class="nav-item on">View All</div>
+        <div class="nav-item">Academic Level View</div>
+        <div class="nav-item">Gender View</div>
+      </div>
+      <div class="content">
+        <h3>Slide 5 — Interactive Story View</h3>
+        <div class="grid2x2">
+          <div class="card">
+            <h4>Avg Usage Hours by Gender</h4>
+            <canvas id="chGender"></canvas>
+          </div>
+          <div class="card">
+            <h4>Most Used Platform by Gender</h4>
+            <canvas id="chPlatGender"></canvas>
+          </div>
+          <div class="card">
+            <h4>Avg Usage Hours by Academic Level</h4>
+            <canvas id="chAcad"></canvas>
+          </div>
+          <div class="card">
+            <h4>Most Used Platform by Academic Level</h4>
+            <canvas id="chPlatAcad"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
 
 ### 🔍 Slide 6 — Drill-Through Analysis
