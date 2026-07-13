@@ -136,17 +136,22 @@ This section provides a detailed walkthrough of each dashboard page, explaining 
 
 
 
+
+
 **Purpose:** Provide stakeholders with a comprehensive overview of student social media usage, wellbeing, and academic behavior through high-level KPIs and interactive visualizations.
 
 
-
+---
 
 
 **Business Objective**
 
+
 The Executive Summary serves as the landing page of the dashboard.
 
+
 Its purpose is to give users a quick snapshot of the entire dataset without requiring them to navigate through multiple report pages. It enables educators, researchers, and decision-makers to immediately understand the current state of student digital wellbeing.
+
 
 
 This page answers important business questions such as:
@@ -158,6 +163,7 @@ This page answers important business questions such as:
 - Is the dataset balanced across genders?
 
 
+---
 
 **Key KPIs**
 
@@ -168,7 +174,7 @@ This page answers important business questions such as:
 | Average Sleep Hours | 6.87 hrs | Sleep duration is below the recommended 7–9 hours |
 | Academic Impact | 64% | A large proportion of students reported academic impact due to social media usage |
 
-
+---
 
 **Visuals Explained**
 
