@@ -134,10 +134,6 @@ This section provides a detailed walkthrough of each dashboard page, explaining 
 
 
 
-
-
-
-
 **Purpose:** Provide stakeholders with a comprehensive overview of student social media usage, wellbeing, and academic behavior through high-level KPIs and interactive visualizations.
 
 
@@ -146,10 +142,7 @@ This section provides a detailed walkthrough of each dashboard page, explaining 
 
 **Business Objective**
 
-
 The Executive Summary serves as the landing page of the dashboard.
-
-
 Its purpose is to give users a quick snapshot of the entire dataset without requiring them to navigate through multiple report pages. It enables educators, researchers, and decision-makers to immediately understand the current state of student digital wellbeing.
 
 
@@ -211,9 +204,8 @@ Instead of looking at isolated metrics, this page focuses on identifying relatio
 
 
 *Addiction Score vs Mental Health Score*
-
-
 A scatter plot compares students' addiction scores with their mental health ratings. Rather than displaying averages, this visualization highlights behavioral patterns across individual students.
+
 
 
 **Finding:** Students with higher addiction scores generally tend to report lower mental health ratings, indicating a possible negative relationship between excessive social media usage and wellbeing.
@@ -226,8 +218,6 @@ This line chart compares sleep duration across different age groups.
 
 
 **Finding:** Most students average between 6.8 and 7 hours of sleep, which is slightly below the recommended duration for healthy adults.
-
-
 
 *Country-wise Health Band*
 Students are grouped into different health categories based on wellbeing scores. This visualization enables geographical comparisons and highlights variations in mental wellbeing across regions.
@@ -307,6 +297,8 @@ These insights help educational institutions focus awareness campaigns and stude
 <img width="1154" height="650" alt="617068831-f0ca570a-b18e-40e4-893f-04877ec4a143" src="https://github.com/user-attachments/assets/c98d16c2-20d4-4e25-9639-d82efc6baa6d" />
 
 
+
+Dashboard Preview
 
 This page explores relationship status distribution alongside student-wise addiction scores, filtered by country and academic level, to surface links between social media habits and relationship conflicts.
 
